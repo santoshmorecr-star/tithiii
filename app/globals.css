@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@theme inline {
+  --font-sans: var(--font-sans), ui-sans-serif, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+  --color-background: var(--background); --color-foreground: var(--foreground); --color-card: var(--card); --color-card-foreground: var(--card-foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground); --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground); --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground); --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground); --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring); --radius-lg: var(--radius); --radius-md: calc(var(--radius) * .75); --radius-sm: calc(var(--radius) * .5);
+}
+:root { --background: #fbf8f2; --foreground: #20242c; --card: #fffdf9; --card-foreground: #20242c; --primary: #b94e2d; --primary-foreground: #fffaf2; --secondary: #f1e7d7; --secondary-foreground: #5e392a; --muted: #f4eee5; --muted-foreground: #716b63; --accent: #e2ae45; --accent-foreground: #3a2b1d; --border: #e6dccd; --input: #e6dccd; --ring: #b94e2d; --radius: 1rem; }
+* { @apply border-border outline-ring/50; }
+html { scroll-behavior: smooth; }
+body { @apply bg-background text-foreground font-sans; }
+.font-serif { font-family: var(--font-serif); }
+::selection { background: #ead2b3; color: #3b2b23; }

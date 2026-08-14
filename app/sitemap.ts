@@ -1,0 +1,2 @@
+import type { MetadataRoute } from 'next'
+export default function sitemap(): MetadataRoute.Sitemap { const routes=['','panchang','calendar','festivals','ekadashi','purnima','amavasya','muhurat','about','contact','privacy','terms','disclaimer','location','search']; return routes.map(route=>({url:`https://tithiii.xyz/${route}`,lastModified:new Date(),changeFrequency:route===''?'daily':'monthly',priority:route===''?1:.7})) }
