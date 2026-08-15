@@ -3,12 +3,12 @@
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, CalendarDays, MapPin, Sparkles } from 'lucide-react'
-import { AdSlot } from '@/components/site-shell'
+import { AdSlot, SiteShell } from '@/components/site-shell'
 import { calendarByDate, calendarEntries, disclaimer, ekadashis, festivals, festivalsByDate, formatDate, isSameMonth, monthLabel, muhurat, todayKey, type CalendarEntry } from '@/lib/observances'
 
 const buttonClass = 'rounded-full border border-border px-3 py-2 text-sm font-medium transition hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
 function Header({ eyebrow, title, intro }: { eyebrow: string; title: string; intro: string }) { return <div className="mx-auto max-w-6xl px-5 pb-8 pt-12 md:pt-16"><p className="text-xs font-semibold uppercase tracking-[.22em] text-primary">Tithiii / {eyebrow}</p><h1 className="mt-4 max-w-3xl font-serif text-4xl leading-tight tracking-tight text-balance md:text-6xl">{title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">{intro}</p><div className="mt-5 flex items-center gap-2 text-sm text-muted-foreground"><MapPin className="size-4 text-primary" /> Mumbai, India · IST</div></div> }
-function Shell({ children, ...props }: { children: React.ReactNode; eyebrow: string; title: string; intro: string }) { return <><Header {...props} /><main className="mx-auto max-w-6xl px-5 pb-16">{children}</main></> }
+function Shell({ children, ...props }: { children: React.ReactNode; eyebrow: string; title: string; intro: string }) { return <SiteShell><Header {...props} /><main className="mx-auto max-w-6xl px-5 pb-16">{children}</main></SiteShell> }
 function MonthControls({ date, setDate }: { date: Date; setDate: (date: Date) => void }) { return <div className="flex flex-wrap items-center gap-2"><button className={buttonClass} aria-label="Previous month" onClick={() => setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1))}><ArrowLeft className="mr-1 inline size-4" /> Previous</button><span className="min-w-40 text-center font-serif text-xl">{monthLabel(date)}</span><button className={buttonClass} aria-label="Next month" onClick={() => setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1))}>Next <ArrowRight className="ml-1 inline size-4" /></button><button className={buttonClass} onClick={() => setDate(new Date())}>Today</button></div> }
 function Notice() { return <p className="mt-8 border-l-2 border-primary px-4 text-sm leading-6 text-muted-foreground">{disclaimer}</p> }
 
