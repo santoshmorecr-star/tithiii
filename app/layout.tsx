@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: { title: 'Tithiii — Hindu Calendar & Panchang', description: 'Daily Panchang, festivals and Hindu calendar information for India.', url: 'https://tithiii.xyz', siteName: 'Tithiii', type: 'website' },
   robots: { index: true, follow: true },
+  other: { 'google-adsense-account': 'ca-pub-5893013929731437' },
 }
 export const viewport: Viewport = { themeColor: '#fbf8f2', colorScheme: 'light', width: 'device-width', initialScale: 1 }
 
