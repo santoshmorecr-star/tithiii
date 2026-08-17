@@ -1,9 +1,7 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { Menu, MapPin, Search, X } from 'lucide-react'
-
-declare global { interface Window { adsbygoogle: unknown[] } }
 
 const nav = [['Panchang','/panchang'],['Calendar','/calendar'],['Festivals','/festivals'],['Ekadashi','/ekadashi'],['Muhurat','/muhurat']]
 export function SiteShell({ children }: { children: React.ReactNode }) {
@@ -12,11 +10,5 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 }
 function Footer(){return <footer className="mt-20 border-t border-border/80 bg-[#f5eee4]"><div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.4fr_1fr_1fr]"><div><div className="font-serif text-2xl font-semibold">Tithiii</div><p className="mt-3 max-w-xs text-sm leading-6 text-muted-foreground">A clearer way to follow the Hindu calendar, daily Panchang and festivals.</p></div><div><p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Explore</p><div className="mt-4 grid gap-3 text-sm">{nav.slice(0,4).map(([l,h])=><Link href={h} key={h} className="hover:text-primary">{l}</Link>)}</div></div><div><p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">About Tithiii</p><div className="mt-4 grid gap-3 text-sm"><Link href="/about">About</Link><Link href="/contact">Contact</Link><Link href="/privacy">Privacy</Link><Link href="/disclaimer">Disclaimer</Link></div></div></div><div className="border-t border-border/70 px-5 py-5 text-center text-xs text-muted-foreground">© 2026 Tithiii · Timings vary by location and tradition.</div></footer>}
 export function AdSlot({label='Advertisement'}:{label?:string}){
- const adRef=useRef<HTMLElement>(null)
- useEffect(()=>{
-  const ad=adRef.current
-  if(!ad || ad.getAttribute('data-adsbygoogle-status')) return
-  try{(window.adsbygoogle=window.adsbygoogle||[]).push({})}catch{ /* AdSense may be unavailable in preview or before approval. */}
- },[])
- return <div className="border-y border-dashed border-border py-3"><p className="mb-2 text-center text-[10px] uppercase tracking-[.25em] text-muted-foreground/60">{label}</p><ins ref={adRef} className="adsbygoogle block min-h-20" data-ad-client="ca-pub-5893013929731437" data-ad-format="auto" data-full-width-responsive="true" /></div>
+ return <section aria-label={label} data-advertising-section className="border-y border-dashed border-border py-3"><p className="text-center text-[10px] uppercase tracking-[.25em] text-muted-foreground/60">{label}</p></section>
 }
