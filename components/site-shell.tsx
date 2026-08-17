@@ -1,7 +1,9 @@
 'use client'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Menu, MapPin, Search, X } from 'lucide-react'
+
+declare global { interface Window { adsbygoogle: unknown[] } }
 
 const nav = [['Panchang','/panchang'],['Calendar','/calendar'],['Festivals','/festivals'],['Ekadashi','/ekadashi'],['Muhurat','/muhurat']]
 export function SiteShell({ children }: { children: React.ReactNode }) {
@@ -9,4 +11,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
  return <><header className="sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur"><div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5"><Link href="/" className="flex items-center gap-2" aria-label="Tithiii home"><span className="grid size-9 place-items-center rounded-full bg-primary text-lg text-primary-foreground">ॐ</span><span className="font-serif text-2xl font-semibold tracking-tight">Tithiii</span></Link><nav className="hidden items-center gap-7 md:flex">{nav.map(([label,href])=><Link key={href} href={href} className="text-sm text-muted-foreground transition-colors hover:text-primary">{label}</Link>)}</nav><div className="flex items-center gap-2"><Link href="/search" className="grid size-9 place-items-center rounded-full hover:bg-muted" aria-label="Search"><Search size={18}/></Link><Link href="/location" className="hidden items-center gap-1.5 rounded-full bg-secondary px-3 py-2 text-xs font-medium text-secondary-foreground sm:flex"><MapPin size={14}/> Mumbai</Link><button className="grid size-9 place-items-center rounded-full hover:bg-muted md:hidden" onClick={()=>setOpen(!open)} aria-label="Toggle navigation">{open?<X size={20}/>:<Menu size={20}/>}</button></div></div>{open&&<nav className="border-t border-border px-5 py-3 md:hidden">{nav.map(([label,href])=><Link onClick={()=>setOpen(false)} className="block py-3 text-sm" key={href} href={href}>{label}</Link>)}</nav>}</header>{children}<Footer/></>
 }
 function Footer(){return <footer className="mt-20 border-t border-border/80 bg-[#f5eee4]"><div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.4fr_1fr_1fr]"><div><div className="font-serif text-2xl font-semibold">Tithiii</div><p className="mt-3 max-w-xs text-sm leading-6 text-muted-foreground">A clearer way to follow the Hindu calendar, daily Panchang and festivals.</p></div><div><p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Explore</p><div className="mt-4 grid gap-3 text-sm">{nav.slice(0,4).map(([l,h])=><Link href={h} key={h} className="hover:text-primary">{l}</Link>)}</div></div><div><p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">About Tithiii</p><div className="mt-4 grid gap-3 text-sm"><Link href="/about">About</Link><Link href="/contact">Contact</Link><Link href="/privacy">Privacy</Link><Link href="/disclaimer">Disclaimer</Link></div></div></div><div className="border-t border-border/70 px-5 py-5 text-center text-xs text-muted-foreground">© 2026 Tithiii · Timings vary by location and tradition.</div></footer>}
-export function AdSlot({label='Advertisement'}:{label?:string}){return <div className="flex min-h-20 items-center justify-center border-y border-dashed border-border text-[10px] uppercase tracking-[.25em] text-muted-foreground/60">{label}</div>}
+export function AdSlot({label='Advertisement'}:{label?:string}){
+ const adRef=useRef<HTMLElement>(null)
+ useEffect(()=>{
+  const ad=adRef.current
+  if(!ad || ad.getAttribute('data-adsbygoogle-status')) return
+  try{(window.adsbygoogle=window.adsbygoogle||[]).push({})}catch{ /* AdSense may be unavailable in preview or before approval. */}
+ },[])
+ return <div className="border-y border-dashed border-border py-3"><p className="mb-2 text-center text-[10px] uppercase tracking-[.25em] text-muted-foreground/60">{label}</p><ins ref={adRef} className="adsbygoogle block min-h-20" data-ad-client="ca-pub-5893013929731437" data-ad-format="auto" data-full-width-responsive="true" /></div>
+}

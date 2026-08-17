@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: '#fbf8f2', colorScheme: 'light', width: 'device-width', initialScale: 1 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`${sans.variable} ${serif.variable} bg-background`}><body className="antialiased">{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return <html lang="en" className={`${sans.variable} ${serif.variable} bg-background`}><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5893013929731437" crossOrigin="anonymous" /></head><body className="antialiased">{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
 }
 
 export const revalidate = 3600
